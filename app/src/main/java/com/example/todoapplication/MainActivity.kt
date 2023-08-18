@@ -66,32 +66,9 @@ import kotlinx.coroutines.launch
 import kotlin.reflect.KFunction1
 
 
-class PreferencesDataStore(context: Context){
-
-    private val Context.dataStore by preferencesDataStore(name = "todoList")
-    private var pref = context.dataStore
-
-    companion object {
-        var taskList = stringPreferencesKey(name = "rando")
-    }
-
-    suspend fun setTask(task : String?){
-        pref.edit {
-            if(task != null) it[taskList] = task
-        }
-    }
-
-    suspend fun getTask() = pref.data.map {
-        it[taskList]
-    }
-
-}
-
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var preferenceDataStore = PreferencesDataStore(this)
 
         val db by lazy {
             Room.databaseBuilder(
@@ -109,11 +86,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         )
-
-        var tasks : List<Task> = mutableListOf()
-        CoroutineScope(Dispatchers.IO).launch{
-            //tasks = db.dao.getTasks()
-        }
 
         setContent {
             ToDoApplicationTheme {
@@ -323,8 +295,7 @@ fun AddTask(state: TaskState, onEvent: KFunction1<TaskEvent, Unit>,navController
 @Composable
 fun ToDoPreview() {
     ToDoApplicationTheme {
-        //ToDoList()
-        //AddTask()
+
     }
 }
  */
