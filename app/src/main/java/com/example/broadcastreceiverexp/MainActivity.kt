@@ -97,6 +97,7 @@ class MainActivity : ComponentActivity() {
 fun YoutubeIntent(context : Context){
     Button(onClick = {
         // Declaring an intent to open youtube
+        // implicit intent
         Intent(Intent.ACTION_VIEW, Uri.parse("https://youtu.be/2hIY1xuImuQ?si=J1hFkeimoHwvvAT4")).also{
             // it.`package` = "com.google.android.youtube"
             try {
